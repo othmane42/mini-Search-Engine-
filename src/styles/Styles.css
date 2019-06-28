@@ -1,0 +1,45 @@
+*{
+    -fx-font-family : "Arial";
+    -fx-color-name-file: #1A5EC9; 
+    -fx-color-absolute-path : #006621;
+    -fx-color-header : #777777;
+}
+
+
+#result #name-file{
+    -fx-font-size: 20px;
+    -fx-text-fill : -fx-color-name-file;
+    
+}
+#result #absolute-path{
+    -fx-text-fill : -fx-color-absolute-path;
+}
+
+#result #absolute-path:hover{
+    -fx-text-fill: -fx-color-name-file;
+    -fx-underline : true;
+}
+
+#result #name-file:hover{
+      -fx-underline : true;
+      -fx-font-weight: bold;
+     
+}
+
+#result #header{
+    -fx-text-fill : -fx-color-header;
+}
+
+
+.keyword {
+    -fx-fill: red;
+    -fx-font-weight: bold;
+}
+
+.text {
+    /* set the entire area's font size to the given size */
+  -fx-font-family: Verdana, Arial, Helvetica,  sans-serif;
+  
+}
+
+

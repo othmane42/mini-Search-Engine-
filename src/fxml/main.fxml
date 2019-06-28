@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="root" prefHeight="392.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.main.MainController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="93.0" prefWidth="327.0" spacing="20.0" StackPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="searchField" onKeyPressed="#openResultView" prefWidth="327.0" promptText="tapez votre requête..." />
+            <JFXButton onAction="#openResultView2" text="Recherche" />
+         </children>
+      </VBox>
+      <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" spacing="20.0" StackPane.alignment="TOP_RIGHT">
+         <children>
+            <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openHistoryView" text="history" />
+            <Button mnemonicParsing="false" onAction="#openSettingView" text="Settings" />
+         </children>
+         <StackPane.margin>
+            <Insets right="8.0" top="8.0" />
+         </StackPane.margin>
+      </HBox>
+   </children>
+</StackPane>
