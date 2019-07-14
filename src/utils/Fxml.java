@@ -36,7 +36,21 @@ public  enum Fxml {
         public URL get_path() {
             return getClass().getResource("/fxml/ResultView.fxml");
         }
-        };   
+        },
+    DIRECTORY_VIEW{
+          @Override
+        public URL get_path() {
+            return getClass().getResource("/fxml/DirectoryView.fxml");
+        }
+      
+    },DIRECTORY_MANAGER{
+        @Override
+        public URL get_path() {
+            return getClass().getResource("/fxml/DirectoryManager.fxml");
+        }
+        
+    };
+    
     /**
      *
      */

@@ -9,7 +9,7 @@ package utils;
  *
  * @author otmane42
  */
-public interface Observer {
+public interface ResultViewObserver {
     
     public void notifier(String header,String absPath,String nameFile);
     

@@ -5,6 +5,7 @@
  */
 package fxml;
 
+import com.mycompany.searchengine.GeneralController;
 import com.mycompany.searchengine.Switcher;
 import java.net.URL;
 import java.util.Collection;
@@ -40,7 +41,7 @@ public class ResultVisualisation implements Initializable {
     private StackPane resultContainer;
     @FXML
     private StackPane root;
-    private LinkedList<Node> listBackup;
+    private GeneralController generalController=GeneralController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,12 +49,13 @@ public class ResultVisualisation implements Initializable {
         codeArea = new CodeArea();
         resultContainer.getChildren().clear();
         resultContainer.getChildren().add(codeArea);
-        
+        init();
     }
 
-    public void init(String text, String query,LinkedList<Node> list) {
+    public void init() {
 
-        this.listBackup=list;
+        String query=generalController.getCurrentQuery();
+        String text = generalController.getCurrentResult().getText();
         String[] queryTerms = query.toLowerCase().split(" ");
         String KEYWORD_PATTERN = "\\b("
                 + String.join("|", queryTerms) + ")\\b";
@@ -87,7 +89,6 @@ public class ResultVisualisation implements Initializable {
     @FXML
     private void goBack(ActionEvent event) {
         ListResult listResult = (ListResult) Switcher.newInstance().swtichScene(root,Fxml.LIST_RESULT);
-        listResult.initViewList(listBackup);
     }
 
 }

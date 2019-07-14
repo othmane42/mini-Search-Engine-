@@ -11,18 +11,20 @@
     -fx-text-fill : -fx-color-name-file;
     
 }
-#result #absolute-path{
+ .absolute-path{
     -fx-text-fill : -fx-color-absolute-path;
 }
 
-#result #absolute-path:hover{
+.absolute-path:hover{
     -fx-text-fill: -fx-color-name-file;
     -fx-underline : true;
+    -fx-cursor: hand;
 }
 
 #result #name-file:hover{
       -fx-underline : true;
       -fx-font-weight: bold;
+       -fx-cursor: hand;
      
 }
 

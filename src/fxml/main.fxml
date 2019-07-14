@@ -18,7 +18,6 @@
       </VBox>
       <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" spacing="20.0" StackPane.alignment="TOP_RIGHT">
          <children>
-            <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openHistoryView" text="history" />
             <Button mnemonicParsing="false" onAction="#openSettingView" text="Settings" />
          </children>
          <StackPane.margin>

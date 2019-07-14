@@ -8,9 +8,14 @@ package com.mycompany.searchengine;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utils.Fxml;
 
@@ -67,9 +72,30 @@ public class Switcher {
             e.printStackTrace();
             return null;
         }
-
-
     }
+    
+      public static Object createWindow(Fxml path,String title) {
+      try {
+          Parent root=null;
+          FXMLLoader loader=new FXMLLoader(path.get_path());
+          root=loader.load();
+          Stage stage = new Stage();
+          stage.setTitle(title);
+          stage.setMinWidth(400);
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          stage.initModality(Modality.APPLICATION_MODAL);
+          //  stage.getIcons().add(new Image(getClass().getResource("/res/Icons/logo.png").toExternalForm()));
+          stage.show();
+          
+          return loader.getController();
+          //   return null;
+      } catch (IOException ex) {
+          Logger.getLogger(Switcher.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return null;
+    }
+   
     
  
 }

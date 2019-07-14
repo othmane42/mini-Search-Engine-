@@ -5,10 +5,12 @@
  */
 package vue.ListResult;
 
+import com.mycompany.searchengine.GeneralController;
 import com.mycompany.searchengine.Switcher;
 import fxml.ResultVisualisation;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -37,9 +39,8 @@ public class ListResult implements Initializable {
     
     private LinkedList<Node> listResults= new LinkedList<>();
     
-     
+    private GeneralController generalController=GeneralController.getInstance();
     
-   
     /**
      * Initializes the controller class.
      */
@@ -48,6 +49,7 @@ public class ListResult implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
      //   fillWithDummies();
+     initList();
     }    
 
     private void fillWithDummies() {
@@ -65,27 +67,21 @@ public class ListResult implements Initializable {
         Switcher.newInstance().swtichScene(root,Fxml.MAIN);
     }
 
-
-    public void initList(Set<String> resultQuery,String query) {
+    public void initList() {
         listResult.getChildren().clear();
-        for (String string : resultQuery) {
+        ArrayList<Result> listResultModel = generalController.getListResult();
+        for (Result result : listResultModel) {
             ResultView resultView = new ResultView();
-            Result result = new Result(string);
             result.setObserver(resultView);
             listResult.getChildren().add(resultView);
             listResults.add(resultView);
             resultView.getNameFile().setOnMouseClicked((v)->{
            // Switcher.newInstance().setNamePath("/fxml/result_visualisation");
+              generalController.selectCurrentResult(result);
                 ResultVisualisation resultVisualisation = (ResultVisualisation) Switcher.newInstance().swtichScene(root,Fxml.RESULT_VISUALISATION);
-                resultVisualisation.init(result.getText(),query,listResults);      
             }); 
     
         }
-    }
-    public void initViewList(LinkedList<Node> list){
-      //  listResult.getChildren().addAll(new LinkedList<>());
-        listResult.getChildren().addAll(list);
-        
     }
     
 }

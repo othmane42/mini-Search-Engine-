@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.Observer;
+import utils.ResultViewObserver;
 
 /**
  *
@@ -25,7 +25,7 @@ public class Result {
     public String nameFile;
     public String absolutePath;
     private String header;
-    private Observer resultView;
+    private ResultViewObserver resultView;
 
    
     public Result(String absolutePath) {
@@ -33,9 +33,8 @@ public class Result {
         try {
             this.absolutePath = absolutePath;
             data = new String(Files.readAllBytes(Paths.get(this.absolutePath)));
-            this.header=data.substring(0, MAX_SIZE_HEADER);
             this.nameFile=Paths.get(absolutePath).getFileName().toString();
-            
+            this.header=data.substring(0, MAX_SIZE_HEADER);
         } catch (IOException ex) {
             Logger.getLogger(Result.class.getName()).log(Level.SEVERE, null, ex);
         }catch(StringIndexOutOfBoundsException ex){
@@ -47,29 +46,34 @@ public class Result {
     public String getHeader() {
         return header;
     }
-    public void setObserver(Observer observer){
+    public void setObserver(ResultViewObserver observer){
         this.resultView=observer;
         this.resultView.notifier(header, absolutePath, nameFile);
     }
 
-    public Observer getResultView() {
+    public ResultViewObserver getResultView() {
         return resultView;
     }
 
     public String getText() {
+        BufferedReader buf=null;
         try {
   //          String string = new String(Files.readAllBytes(Paths.get(this.absolutePath)));
-            BufferedReader buf=new BufferedReader(new FileReader(new File(this.absolutePath)));
+            buf=new BufferedReader(new FileReader(new File(this.absolutePath)));
             StringBuilder builder= new StringBuilder();
             String str="";
-            int i=0;
             while((str=buf.readLine())!=null ){
                 builder.append(str+"\n");
-                System.out.println("num ligne"+(i++));
             }
             return builder.toString();
         } catch (IOException ex) {
             Logger.getLogger(Result.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                buf.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Result.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }

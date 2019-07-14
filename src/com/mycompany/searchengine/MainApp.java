@@ -6,15 +6,13 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.Fxml;
-import utils.WekaUtils;
 
 
 public class MainApp extends Application {
 
-    static final String TEST_PATH="D:\\documents\\tp\\tp rechercheInformation\\tp2\\tp2\\corpus";
+    private GeneralController controller;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Fxml.MAIN.get_path());
@@ -22,10 +20,17 @@ public class MainApp extends Application {
         scene.getStylesheets().add("/styles/Styles.css");
         
         stage.setTitle("Search Engine");
-        WekaUtils.getInstance().initDataSet(TEST_PATH);
+        controller= GeneralController.getInstance();
+        controller.init();
         stage.setScene(scene);
         Switcher.newInstance().setCurrentStage(stage);
         stage.show();
+        stage.setOnCloseRequest((v)->{
+            controller.stop();
+            controller.stopWatchers();
+       //     controller.saveCheckpoint();
+            
+        });
     }
 
     /**
