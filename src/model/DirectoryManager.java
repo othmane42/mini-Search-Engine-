@@ -8,6 +8,8 @@ package model;
 import utils.DirectoryWatcher;
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
@@ -82,13 +84,42 @@ public class DirectoryManager implements Serializable {
         }
     }
     public boolean checkChanges(){
+      
+        
+        
         return this.list.stream()
                 .filter((f)-> f.exists())
                 .anyMatch((v)->{
-                  boolean bool=v.getLastModified()!=new File(v.getPath()).lastModified();
-            if(bool)  v.update();
-                    return bool;
-                        });
+                    
+                    File file =new File(v.getPath());
+                  //  if(file.isDirectory())
+                        
+                    boolean bool=v.getLastModified()!=new File(v.getPath()).lastModified();
+                    if(bool) {
+                        v.update();
+          //              return bool;
+                    }
+           //         boolean bool_subdir=recursiveVerification(file,file);
+                    
+             //       return bool || bool_subdir ;
+              return bool;
+                });
+    }
+    
+    private boolean recursiveVerification(File root,File directory){
+        File[] listFiles = directory.listFiles();
+        ArrayList<File> list=new ArrayList<File>();
+        Collections.addAll(list, listFiles);
+       return list.stream().filter((f)->f.isFile() && f.exists()).anyMatch(
+         (f)->{
+            boolean bool=f.lastModified()!=root.lastModified();
+            
+            if(bool){
+               return true; 
+            }
+             return recursiveVerification(root,f);
+         });
+    
     }
     
     public void startWatch(){

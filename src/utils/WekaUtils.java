@@ -227,7 +227,10 @@ public class WekaUtils {
         };
       TreeMap<String,Double> results = new TreeMap<String, Double>(comparator);
       results.putAll(map);
-    
+      results.forEach((s,v)->{
+          System.out.println("s : "+s+"  v :"+v);
+      });
+      
       return results.keySet();
     }
 
